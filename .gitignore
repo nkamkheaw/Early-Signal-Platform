@@ -141,3 +141,4 @@ private/*
 # creds
 .private-key
 .secret
+.idea/

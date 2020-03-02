@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export API_BASE_URL="https://api.github.com" 
+export GH_APP_ID="55963"
+export GH_APP_CLIENT_ID="Iv1.e9c8b3ea9c8a11ea"
+export GH_APP_CLIENT_SECRET="918c17f51e260ad6fec343e8c6945ad85a1ebdb2"
+export GH_APP_PRIVATE_KEY_PATH="/Users/nkamkhea/playground/mock-pr-validation-app/private/gh-app.key"
+
+flask run
