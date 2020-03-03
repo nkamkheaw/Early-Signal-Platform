@@ -15,6 +15,6 @@ log = logging.getLogger(__name__)
 
 
 def check_suite_request_handler(webhook):
-    """Gather the required information from the payload to send a successful request to GitHub REST API."""
-
+    # Directly create check runs though CheckSuite class right here.
+    # We might be able to add a logic to kill existing CheckSuite (from previous hash) before kicking off a new one.
     CheckSuite(webhook)

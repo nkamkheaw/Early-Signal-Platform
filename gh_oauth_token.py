@@ -100,7 +100,7 @@ def peek_app_token():
 def refresh_token():
     """Refresh tokens of an individual app."""
     try:
-        deserialized_message = peek_app_token()
+        deserialized_message = json.loads(peek_app_token())
         app_id = deserialized_message.get('app_id')
         installation_id = deserialized_message.get('installation_id')
         store_token(get_token(app_id, installation_id))
