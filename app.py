@@ -1,6 +1,6 @@
 from bot_config import API_BASE_URL, validate_env_variables
 from gh_oauth_token import get_token, store_token
-from webhook_handlers import check_suite_request_handler
+from webhook_handlers import check_suite_request_handler, check_suite_override_handler
 
 import json
 import logging
@@ -79,11 +79,14 @@ def process_message():
     event = request.headers['X-Github-Event']
     action = str(webhook.action).lower()
 
-    if event == "check_suite" and action == "requested":
+    if event == "check_suite" and (action == "requested" or action == "rerequested"):
         log.info("Check suite requested.")
         check_suite_request_handler(webhook)
     elif event == "check_run" and action == "created":
         log.info(f"Check run {webhook.check_run.name} create confirmed.")
+    elif event == "issue_comment" and action == "created":
+        log.info(f"Comment posted")
+        check_suite_override_handler(webhook)
     else:
         log.info(f"Ignore webhook event {event} action {action}")
 
