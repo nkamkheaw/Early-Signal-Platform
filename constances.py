@@ -1,6 +1,6 @@
 from typing import Any, Dict, List
 
-APP_NAME: str = "mock pr validation app"
+APP_NAME: str = "Early Signal Platform"
 
 NO_VALIDATION_STRING: str = "NOVALIDATIONOVERRIDE"
 

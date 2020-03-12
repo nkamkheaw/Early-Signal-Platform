@@ -108,7 +108,11 @@ def post_check_run_result(name: str,
 class ProcessCheckSuite:
     def __init__(self, webhook: ObjectifyJSON):
         self.webhook = webhook
-        self.conclusion = False
+
+        # test variables
+        self.conclusion = False  # failed
+        # self.conclusion = True  # success
+
         # Note: in the real implementation these threads will be done through spawning jobs through task API.
         start_check_runs_thread = threading.Thread(target=self.start_check_runs())
         start_check_runs_thread.start()
@@ -118,7 +122,7 @@ class ProcessCheckSuite:
             create_check_run_thread = threading.Thread(target=self.create_check_run, args=(test["name"], self.conclusion,))
             create_check_run_thread.start()
             sleep(1)  # simulate spawning job delay
-            # self.conclusion ^= True
+            self.conclusion ^= True
 
     def create_check_run(self, name: str, conclusion: bool) -> None:
         ProcessCheckRun(self.webhook, name, conclusion)
