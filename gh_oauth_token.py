@@ -122,7 +122,7 @@ def retrieve_token():
         else:  # Token expired, refresh it
             refresh_token()
 
-            deserialized_message = peek_app_token()
+            deserialized_message = json.loads(peek_app_token())
             expires_at = deserialized_message.get('expires_at')
             # Token is good, return it
             try:

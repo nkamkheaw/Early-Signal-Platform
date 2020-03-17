@@ -79,8 +79,11 @@ def process_message():
     event = request.headers['X-Github-Event']
     action = str(webhook.action).lower()
 
-    if event == "check_suite" and (action == "requested" or action == "rerequested"):
+    if event == "pull_request" and (action == "opened" or action == "updated"):
         log.info("Check suite requested.")
+        check_suite_request_handler(webhook)
+    elif event == "check_suite" and action == "rerequested":
+        log.info("Check suite re-requested.")
         check_suite_request_handler(webhook)
     elif event == "check_run" and action == "created":
         log.info(f"Check run {webhook.check_run.name} create confirmed.")
